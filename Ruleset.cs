@@ -74,7 +74,23 @@ public class MankalaRules : Ruleset
 
     public int Winner(Cup[] state)
     {
+        bool empty1 = true, empty2 = true;
+        for (int i = 0; i<6; i++)
+        {
+            if (state[i].Pebbles != 0)
+                empty1 = false;
+        }
+        for (int i = 7; i < 13; i++)
+        {
+            if (state[i].Pebbles != 0)
+                empty2 = false;
+        }
+        if (!empty1 && !empty2) return -1;
 
-        return -1;
+        if (state[6].Pebbles > state[13].Pebbles)
+            return 0;
+        else if (state[13].Pebbles > state[6].Pebbles)
+            return 1;
+        else return 2;
     }
 }
