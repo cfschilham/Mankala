@@ -23,13 +23,13 @@ public class MankalaRules : Ruleset
             new Cup(0, 4),
             new Cup(0, 4),
             new HomeCup(0, 0),
-            new Cup(0, 4),
-            new Cup(0, 4),
-            new Cup(0, 4),
-            new Cup(0, 4),
-            new Cup(0, 4),
-            new Cup(0, 4),
-            new HomeCup(0, 0),
+            new Cup(1, 4),
+            new Cup(1, 4),
+            new Cup(1, 4),
+            new Cup(1, 4),
+            new Cup(1, 4),
+            new Cup(1, 4),
+            new HomeCup(1, 0),
         };
     }
 
