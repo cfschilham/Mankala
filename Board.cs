@@ -17,6 +17,8 @@ public class Board
 
     public void ApplyMove(int index) => _turn = _ruleset.ApplyMove(index, _state);
 
+    public override string ToString() => _ruleset + $"\n\nTurn: {_players[_turn].Name} ({_turn + 1})";
+
     public Player GetTurn() => _players[_turn];
 
     public string PrintBoard() => _ruleset.PrintBoard(_state);
