@@ -2,16 +2,28 @@
 
 public interface Ruleset
 {
-    Cup[] GenerateCups();
+    Cup[] GenerateCups(Player player1, Player player2);
     Player ApplyMove(int index, Cup[] state, Player current);
     int Winner(Cup[] state);
 }
 
 public class MankalaRules : Ruleset
 {
-    public Cup[] GenerateCups()
+    public Cup[] GenerateCups(Player player1, Player player2)
     {
-        throw new NotImplementedException();
+        Cup[] state = new Cup[14];
+        for (int i = 0; i < state.Length; i++)
+        {
+            if (i < 6)
+                state[i] = new Cup(player1, 4);
+            else if (i == 6)
+                state[i] = new HomeCup(player1, 4);
+            else if (i < 13)
+                state[i] = new Cup(player2, 4);
+            else
+                state[i] = new HomeCup(player2, 4);
+        }
+        return state;
     }
 
     public Player ApplyMove(int index, Cup[] state, Player current)
@@ -62,6 +74,7 @@ public class MankalaRules : Ruleset
 
     public int Winner(Cup[] state)
     {
-        throw new NotImplementedException();
+
+        return -1;
     }
 }
