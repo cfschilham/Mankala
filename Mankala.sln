@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mankala", "Mankala\Mankala.csproj", "{AC5FA940-F374-425C-A75A-72E65E76C8F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mankala", "Mankala.csproj", "{AC5FA940-F374-425C-A75A-72E65E76C8F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

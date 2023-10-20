@@ -2,25 +2,25 @@
 
 public interface Ruleset
 {
-    void ApplyMove(int player, int index, int[] state);
-    byte Winner(int[] state);
-    int GetCups();
-    bool HasHomeCups();
+    Cup[] GenerateCups();
+    int ApplyMove(int index, Cup[] state);
+    int Winner(Cup[] state);
 }
 
-public class StandardRules : Ruleset
+public class MankalaRules : Ruleset
 {
-    public void ApplyMove(int player, int index, int[] state)
-    {
-        
-    }
-
-    public byte Winner(int[] state)
+    public Cup[] GenerateCups()
     {
         throw new NotImplementedException();
     }
 
-    public int GetCups() => 6;
+    public int ApplyMove(int index, Cup[] state)
+    {
+        throw new NotImplementedException();
+    }
 
-    public bool HasHomeCups() => true;
+    public int Winner(Cup[] state)
+    {
+        throw new NotImplementedException();
+    }
 }
