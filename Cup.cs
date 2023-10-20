@@ -2,17 +2,17 @@
 
 public class Cup
 {
-    public Player Owner { get; set; }
+    public int OwnerIndex { get; set; }
     public int Pebbles { get; set; }
 
-    public Cup(Player owner, int pebbles)
+    public Cup(int ownerIndex, int pebbles)
     {
-        Owner = owner;
+        OwnerIndex = ownerIndex;
         Pebbles = pebbles;
     }
 }
 
 public class HomeCup : Cup
 {
-    public HomeCup(Player owner, int pebbles) : base(owner, pebbles) {}
+    public HomeCup(int ownerIndex, int pebbles) : base(ownerIndex, pebbles) {}
 }
