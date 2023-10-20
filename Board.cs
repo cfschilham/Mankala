@@ -15,13 +15,19 @@ public class Board
         _players = ps;
     }
 
-    public void ApplyMove(int index) => _turn = _ruleset.ApplyMove(index, _state);
+    public void ApplyMove(int index)
+    {
+        if (!_ruleset.PossibleMoves(_turn, _state).Contains(index))
+        {
+            throw new IndexOutOfRangeException("move is not valid");
+        }
+        _turn = _ruleset.ApplyMove(index, _state);
+    }
 
-    public override string ToString() => _ruleset.PrintBoard(_state) + $"\n\nTurn: {_players[_turn].Name} ({_turn + 1})";
+    // TODO: Make more universal to different rulesets (??)
+    public override string ToString() => _players[0].Name + "\n" + _ruleset.PrintBoard(_state) + $"\n{_players[1].Name}" + $"\n\nTurn: {_players[_turn].Name} ({_turn + 1})";
 
     public Player GetTurn() => _players[_turn];
-
-    public string PrintBoard() => _ruleset.PrintBoard(_state);
 
     public int Winner() => _ruleset.Winner(_state);
 }

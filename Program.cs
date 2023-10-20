@@ -14,11 +14,25 @@ class Program
         int winner = -1;
         while (winner == -1) 
         {
-            Console.WriteLine("This is the current board:");
-            Console.Write(board.ToString());
-            Console.WriteLine("It is " + board.GetTurn().Name + "'s turn. \n What move would you like to make?");
-            int move = Convert.ToInt32(Console.ReadLine());
-            board.ApplyMove(move);
+            while (true)
+            {
+                Console.WriteLine("This is the current board:");
+                Console.Write(board.ToString());
+                Console.WriteLine("It is " + board.GetTurn().Name + "'s turn. \n What move would you like to make?");
+                int move = Convert.ToInt32(Console.ReadLine());
+            
+                try
+                {
+                    board.ApplyMove(move);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("move is not valid, try again");
+                    continue;
+                }
+
+                break;
+            }
 
             winner = board.Winner();
         }
