@@ -18,4 +18,8 @@ public class Board
     public void ApplyMove(int index) => _turn = _ruleset.ApplyMove(index, _state);
 
     public Player GetTurn() => _players[_turn];
+
+    public string PrintBoard() => _ruleset.PrintBoard(_state);
+
+    public int Winner() => _ruleset.Winner(_state);
 }
