@@ -25,7 +25,7 @@ public class Board
     }
 
     // TODO: Make more universal to different rulesets (??)
-    public override string ToString() => _players[0].Name + "\n" + _ruleset.PrintBoard(_state) + $"\n{_players[1].Name}" + $"\n\nTurn: {_players[_turn].Name} ({_turn + 1})";
+    public override string ToString() => _players[1].Name + "\n" + _ruleset.PrintBoard(_state) + $"\n{_players[0].Name}" + $"\n\nTurn: {_players[_turn].Name} ({_turn + 1})";
 
     public Player GetTurn() => _players[_turn];
 
