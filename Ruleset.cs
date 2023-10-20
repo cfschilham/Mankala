@@ -37,7 +37,6 @@ public class MankalaRules : Ruleset
     
     public int Winner(Cup[] state)
     {
-        
         return -1;
     }
 
