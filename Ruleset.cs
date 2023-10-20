@@ -1,4 +1,6 @@
-﻿namespace Mankala;
+﻿using System.Text;
+
+namespace Mankala;
 
  
 
@@ -51,8 +53,8 @@ public class MankalaRules : Ruleset
         string PrintSixNumbers(int skip) => string.Join(" ", cupContent.Skip(skip).Take(6).Select(n => n.ToString()));
 
         string result = "";
-        result += "  " + PrintSixNumbers(1) + "  \n";
-        result += cupContent[HomeCupIndex(0)] + " " + Enumerable.Repeat("-", 6) + " " + cupContent[HomeCupIndex(1)] + "\n";
+        result += "  " + PrintSixNumbers(0) + "  \n";
+        result += cupContent[HomeCupIndex(0)] + " " + new string('-', 11) + " " + cupContent[HomeCupIndex(1)] + "\n";
         result += "  " + PrintSixNumbers(7) + "  ";
         return result;
     }

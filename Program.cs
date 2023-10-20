@@ -2,7 +2,7 @@
 
 class Program
 {
-    void Main()
+    static void Main()
     {
         Console.WriteLine("What is the name of PLayer 1?");
         string player1Name = Console.ReadLine();
