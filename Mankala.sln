@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mankala", "Mankala.csproj", "{AC5FA940-F374-425C-A75A-72E65E76C8F1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mankala", "Mankala\Mankala.csproj", "{A4801B38-6C21-40C6-8140-FED1A6BD3A44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mankala.Tests", "Mankala.Tests\Mankala.Tests.csproj", "{23C1BF1C-0B00-4547-9EAC-D6C67E5DBFEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -8,9 +10,13 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC5FA940-F374-425C-A75A-72E65E76C8F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC5FA940-F374-425C-A75A-72E65E76C8F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC5FA940-F374-425C-A75A-72E65E76C8F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC5FA940-F374-425C-A75A-72E65E76C8F1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4801B38-6C21-40C6-8140-FED1A6BD3A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4801B38-6C21-40C6-8140-FED1A6BD3A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4801B38-6C21-40C6-8140-FED1A6BD3A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4801B38-6C21-40C6-8140-FED1A6BD3A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23C1BF1C-0B00-4547-9EAC-D6C67E5DBFEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23C1BF1C-0B00-4547-9EAC-D6C67E5DBFEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23C1BF1C-0B00-4547-9EAC-D6C67E5DBFEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23C1BF1C-0B00-4547-9EAC-D6C67E5DBFEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
