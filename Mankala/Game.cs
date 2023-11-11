@@ -6,11 +6,12 @@ public class Game
     int _turn;
     Player[] _players;
     IRuleset _ruleset;
+    int cups, startingPebbles;
 
     public Game(IRuleFactory rf, Player[] ps)
     {
         _ruleset = rf.MakeRuleset();
-        _state = rf.MakeState();
+        _state = rf.MakeState(cups, startingPebbles);
         _turn = 0;
         _players = ps;
     }

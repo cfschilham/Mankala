@@ -25,28 +25,19 @@ public interface IGraphics
 
 public class MankalaRuleFactory : IRuleFactory
 {
-    public Cup[] MakeState()
+    int cupsAmount;
+    public Cup[] MakeState(int cupsAmount, int startingPebbles)
     {
-        return new[]
-        {
-            new Cup(1, 0, Cup.CupType.Home),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 0, Cup.CupType.Home),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-        };
+        Cup[] cups; this.cupsAmount = cupsAmount
+        cups[0] = new Cup(1, 0, Cup.CupType.Home);
+        cups[cupsAmount + 1] = new Cup(0, 0, Cup.CupType.Home);
+        for (int i = 1; i <= cupsAmount; i++) { cups[i] = new Cup(0, startingPebbles, Cup.CupType.Regular); }
+        for (int i = cupsAmount + 2; i <= cupsAmount * 2 + 1; i++) { cups[i] = new Cup(1, startingPebbles, Cup.CupType.Regular); }
+
+        return cups;
     }
 
-    public IRuleset MakeRuleset() => new MankalaRules(t => t == 0 ? 7 : 0);
+    public IRuleset MakeRuleset() => new MankalaRules(t => t == 0 ? cupsAmount + 1 : 0);
 
     public IGraphics MakeGraphics() => new BasicGraphics();
 }
@@ -88,7 +79,7 @@ public class MankalaRules : IRuleset
         }
 
         i--; // Make i equal the last cup into which a pebble was put.
-        if (i == -1) i = 13;
+        if (i == -1) i = state.Length;
         if (state[i].Type == Cup.CupType.Home) return turn;
         if (state[i].Pebbles > 1) return ApplyMoveTail(i, state, turn);
         if (state[i].OwnerIndex != turn) return 1 - turn;
@@ -151,26 +142,19 @@ public class WariRuleFactory : IRuleFactory
 {
     public Cup[] MakeState()
     {
-        return new[]
+        public Cup[] MakeState(int cupsAmount, int startingPebbles)
         {
-            new Cup(1, 0, Cup.CupType.Home),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 4, Cup.CupType.Regular),
-            new Cup(0, 0, Cup.CupType.Home),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-            new Cup(1, 4, Cup.CupType.Regular),
-        };
+            Cup[] cups;
+            cups[0] = new Cup(1, 0, Cup.CupType.Home);
+            cups[cupsAmount + 1] = new Cup(0, 0, Cup.CupType.Home);
+            for (int i = 1; i <= cupsAmount; i++) { cups[i] = new Cup(0, startingPebbles, Cup.CupType.Regular); }
+            for (int i = cupsAmount + 2; i <= cupsAmount * 2 + 1; i++) { cups[i] = new Cup(1, startingPebbles, Cup.CupType.Regular); }
+
+            return cups;
+        }
     }
 
-    public IRuleset WariRuleset() => new WariRules;
+    public IRuleset WariRuleset() => new WariRules(t => t == 0 ? cupsAmount + 1 : 0);
 
     public IGraphics MakeGraphics() => new BasicGraphics();
 }
@@ -212,10 +196,86 @@ public class WariRules : IRuleset
         }
 
         i--; // Make i equal the last cup into which a pebble was put.
-        if (i == -1) i = state[index].length -1;
+        if (i == -1) i = state.Length - 1;
         if (state[i].OwnerIndex != turn) && (state[i].Pebbles == (2 || 3))
         {
             state[HomeCupIndex(turn)].Pebbles += state[i].Pebbles;
+            state[i].Pebbles = 0;
+        }
+        return 1 - turn;
+    }
+
+}
+
+public class WankalaRuleFactory : IRuleFactory
+{
+    public Cup[] MakeState()
+    {
+        public Cup[] MakeState(int cupsAmount, int startingPebbles)
+        {
+            Cup[] cups;
+            cups[0] = new Cup(1, 0, Cup.CupType.Home);
+            cups[cupsAmount + 1] = new Cup(0, 0, Cup.CupType.Home);
+            for (int i = 1; i <= cupsAmount; i++) { cups[i] = new Cup(0, startingPebbles, Cup.CupType.Regular); }
+            for (int i = cupsAmount + 2; i <= cupsAmount * 2 + 1; i++) { cups[i] = new Cup(1, startingPebbles, Cup.CupType.Regular); }
+
+            return cups;
+        }
+    }
+
+    public IRuleset WankalaRuleset() => new WankalaRules(t => t == 0 ? cupsAmount + 1 : 0);
+
+    public IGraphics MakeGraphics() => new BasicGraphics();
+}
+
+public class WankalaRules : IRuleset
+{
+    Func<int, int> HomeCupIndex;
+
+    public WankalaRules(Func<int, int> homeCupIndex)
+    {
+        HomeCupIndex = homeCupIndex;
+    }
+
+    public int ApplyMove(int index, Cup[] state) => ApplyMoveTail(index, state, state[index].OwnerIndex);
+
+    public int Winner(Cup[] state)
+    {
+        int[] cupContent = state.Select(c => c.Pebbles).ToArray();
+        int sum1 = cupContent.Take(state.Length / 2).Sum();
+        int sum2 = cupContent.Skip(state.Length / 2).Sum();
+        if (sum1 != 0 && sum2 != 0) return -1;
+        if (state[HomeCupIndex(0)].Pebbles == state[HomeCupIndex(1)].Pebbles) return 2;
+        return state[HomeCupIndex(0)].Pebbles > state[HomeCupIndex(1)].Pebbles ? 0 : 1;
+    }
+
+    public int[] PossibleMoves(int turn, Cup[] state) => state.Select((_, i) => i).Where(i =>
+        state[i].Type == Cup.CupType.Regular && state[i].Pebbles > 0 && state[i].OwnerIndex == turn).ToArray();
+
+    int ApplyMoveTail(int index, Cup[] state, int turn)
+    {
+        int pebbles = state[index].Pebbles;
+        state[index].Pebbles = 0;
+        int i;
+        for (i = (index + 1) % state.Length; pebbles > 0; i = (i + 1) % state.Length)
+        {
+            if (state[i].Type == Cup.CupType.Home) continue;
+            state[i].Pebbles++;
+            pebbles--;
+        }
+
+        i--; // Make i equal the last cup into which a pebble was put.
+        if (i == -1) i = state.Length - 1;
+        if (state[i].OwnerIndex != turn) && (state[i].Pebbles == (2 || 3))
+        {
+            state[HomeCupIndex(turn)].Pebbles += state[i].Pebbles;
+            state[i].Pebbles = 0;
+        }
+        if (state[i].OwnerIndex != turn) return 1 - turn;
+        if (state[^i].Pebbles > 0)
+        {
+            state[HomeCupIndex(turn)].Pebbles += state[^i].Pebbles + 1;
+            state[^i].Pebbles = 0;
             state[i].Pebbles = 0;
         }
         return 1 - turn;
