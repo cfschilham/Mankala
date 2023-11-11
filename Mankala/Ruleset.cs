@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Mankala;
 
@@ -143,4 +144,81 @@ public class BasicGraphics : IGraphics
         if (r == Rectangle.Empty) return -1;
         return _cupLookup[r];
     }
+}
+
+
+public class WariRuleFactory : IRuleFactory
+{
+    public Cup[] MakeState()
+    {
+        return new[]
+        {
+            new Cup(1, 0, Cup.CupType.Home),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 4, Cup.CupType.Regular),
+            new Cup(0, 0, Cup.CupType.Home),
+            new Cup(1, 4, Cup.CupType.Regular),
+            new Cup(1, 4, Cup.CupType.Regular),
+            new Cup(1, 4, Cup.CupType.Regular),
+            new Cup(1, 4, Cup.CupType.Regular),
+            new Cup(1, 4, Cup.CupType.Regular),
+            new Cup(1, 4, Cup.CupType.Regular),
+        };
+    }
+
+    public IRuleset WariRuleset() => new WariRules;
+
+    public IGraphics MakeGraphics() => new BasicGraphics();
+}
+
+public class WariRules : IRuleset
+{
+    Func<int, int> HomeCupIndex;
+
+    public MankalaRules(Func<int, int> homeCupIndex)
+    {
+        HomeCupIndex = homeCupIndex;
+    }
+
+    public int ApplyMove(int index, Cup[] state) => ApplyMoveTail(index, state, state[index].OwnerIndex);
+
+    public int Winner(Cup[] state)
+    {
+        int[] cupContent = state.Select(c => c.Pebbles).ToArray();
+        int sum1 = cupContent.Take(state.Length / 2).Sum();
+        int sum2 = cupContent.Skip(state.Length / 2).Sum();
+        if (sum1 != 0 && sum2 != 0) return -1;
+        if (state[HomeCupIndex(0)].Pebbles == state[HomeCupIndex(1)].Pebbles) return 2;
+        return state[HomeCupIndex(0)].Pebbles > state[HomeCupIndex(1)].Pebbles ? 0 : 1;
+    }
+
+    public int[] PossibleMoves(int turn, Cup[] state) => state.Select((_, i) => i).Where(i =>
+        state[i].Type == Cup.CupType.Regular && state[i].Pebbles > 0 && state[i].OwnerIndex == turn).ToArray();
+
+    int ApplyMoveTail(int index, Cup[] state, int turn)
+    {
+        int pebbles = state[index].Pebbles;
+        state[index].Pebbles = 0;
+        int i;
+        for (i = (index + 1) % state.Length; pebbles > 0; i = (i + 1) % state.Length)
+        {
+            if (state[i].Type == Cup.CupType.Home) continue;
+            state[i].Pebbles++;
+            pebbles--;
+        }
+
+        i--; // Make i equal the last cup into which a pebble was put.
+        if (i == -1) i = state[index].length -1;
+        if (state[i].OwnerIndex != turn) && (state[i].Pebbles == (2 || 3))
+        {
+            state[HomeCupIndex(turn)].Pebbles += state[i].Pebbles;
+            state[i].Pebbles = 0;
+        }
+        return 1 - turn;
+    }
+
 }
