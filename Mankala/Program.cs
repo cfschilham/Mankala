@@ -28,7 +28,7 @@ static class Program
         form.Height = 500;
         form.Width = 800;
         var board = new Board(
-            new Game(factory, new[] { new Player("one"), new Player("two") }),
+            new Game(factory, new[] { new Player(gsd.Player1Name), new Player(gsd.Player2Name) }),
             factory);
         board.Location = new Point(0, 0);
         board.Height = 500;

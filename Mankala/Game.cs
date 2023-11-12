@@ -28,5 +28,7 @@ public class Game
 
     public int Winner() => _ruleset.Winner(_state);
 
-    public Cup[] GetState() => (_state.Clone() as Cup[]).Select(c => new Cup(c.OwnerIndex, c.Pebbles, c.Type)).ToArray();
+    public Cup[] GetState() => (_state.Clone() as Cup[] ?? Array.Empty<Cup>()).Select(c => new Cup(c.OwnerIndex, c.Pebbles, c.Type)).ToArray();
+
+    public Player[] GetPlayers() => (_players.Clone() as Player[] ?? Array.Empty<Player>()).Select(p => new Player(p.Name)).ToArray();
 }

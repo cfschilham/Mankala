@@ -5,11 +5,14 @@ public partial class GameSettingsDialog : Form
     public string Variant => (string)variantComboBox.SelectedItem;
     public int CupsAmount => (int)cupsAmountNumericUpDown.Value;
     public int StartingPebbles => (int)startingPebblesNumericUpDown.Value;
-    
+
+    public string Player1Name => p1name.Text == "" ? "Player 1" : p1name.Text;
+    public string Player2Name => p2name.Text == "" ? "Player 2" : p2name.Text;
+
     public GameSettingsDialog()
     {
         InitializeComponent();
-        variantComboBox.Items.AddRange(new [] {"Mankala", "Wari", "Wankala"});
+        variantComboBox.Items.AddRange(new[] { "Mankala", "Wari", "Wankala" });
         variantComboBox.SelectedIndex = 0;
         DefaultValuesCheckboxChanged(null, null);
         cupsAmountNumericUpDown.Minimum = 2;
@@ -32,5 +35,10 @@ public partial class GameSettingsDialog : Form
         }
         cupsAmountNumericUpDown.Enabled = true;
         startingPebblesNumericUpDown.Enabled = true;
+    }
+
+    private void textBox2_TextChanged(object sender, EventArgs e)
+    {
+
     }
 }

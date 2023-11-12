@@ -21,15 +21,15 @@ public class MankalaRulesTests
     [Fact]
     public void ApplyMove_ValidMove_ChangesState()
     {
-        int turn = _ruleset.ApplyMove(0, _state);
-        Assert.Equal(0, _state[0].Pebbles);
-        Assert.Equal(5, _state[1].Pebbles);
-        Assert.Equal(5, _state[2].Pebbles);
-        Assert.Equal(5, _state[3].Pebbles);
-        Assert.Equal(5, _state[4].Pebbles);
-        Assert.Equal(4, _state[5].Pebbles);
-        Assert.Equal(4, _state[6].Pebbles);
-        Assert.Equal(0, turn);
+        int turn = _ruleset.ApplyMove(1, _state);
+        Assert.Equal(1, _state[1].Pebbles);
+        Assert.Equal(4, _state[2].Pebbles);
+        Assert.Equal(1, _state[3].Pebbles);
+        Assert.Equal(10, _state[4].Pebbles);
+        Assert.Equal(0, _state[5].Pebbles);
+        Assert.Equal(1, _state[6].Pebbles);
+        Assert.Equal(4, _state[7].Pebbles);
+        Assert.Equal(1, turn);
     }
 }
 
@@ -84,14 +84,14 @@ public class WankalaRulesTests
     [Fact]
     public void ApplyMove_ValidMove_ChangesState()
     {
-        int turn = _ruleset.ApplyMove(0, _state);
-        Assert.Equal(0, _state[0].Pebbles);
-        Assert.Equal(5, _state[1].Pebbles);
+        int turn = _ruleset.ApplyMove(1, _state);
+        Assert.Equal(0, _state[1].Pebbles);
         Assert.Equal(5, _state[2].Pebbles);
         Assert.Equal(5, _state[3].Pebbles);
         Assert.Equal(5, _state[4].Pebbles);
-        Assert.Equal(4, _state[5].Pebbles);
-        Assert.Equal(1, _state[6].Pebbles);
+        Assert.Equal(5, _state[5].Pebbles);
+        Assert.Equal(4, _state[6].Pebbles);
+        Assert.Equal(0, _state[7].Pebbles);
         Assert.Equal(1, turn);
     }
 }

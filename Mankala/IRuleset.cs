@@ -20,8 +20,8 @@ public class MankalaRules : IRuleset
         int sum1 = cupContent.Skip(1).Take(state.Length/2-1).Sum();
         int sum2 = cupContent.Skip(state.Length/2+1).Sum();
         if (sum1 != 0 && sum2 != 0) return -1;
-        if (state[0].Pebbles == state[state.Length/2].Pebbles) return 2;
-        return state[0].Pebbles > state[state.Length/2].Pebbles ? 0 : 1;
+        if (state[HomeCupIndex(0, state.Length)].Pebbles == state[HomeCupIndex(1, state.Length)].Pebbles) return 2;
+        return state[HomeCupIndex(0, state.Length)].Pebbles > state[HomeCupIndex(1, state.Length)].Pebbles ? 0 : 1;
     }
 
     public int[] PossibleMoves(int turn, Cup[] state) => state.Select((_, i) => i).Where(i =>
@@ -46,12 +46,14 @@ public class MankalaRules : IRuleset
         if (state[i].OwnerIndex != turn) return 1 - turn;
         if (state[^i].Pebbles > 0)
         {
-            state[turn].Pebbles += state[^i].Pebbles + 1;
+            state[HomeCupIndex(turn, state.Length)].Pebbles += state[^i].Pebbles + 1;
             state[^i].Pebbles = 0;
             state[i].Pebbles = 0;
         }
         return 1 - turn;
     }
+
+    int HomeCupIndex(int turn, int stateLength) => turn == 0 ? stateLength / 2 : 0;
 }
 
 public class WariRules : IRuleset
@@ -64,8 +66,8 @@ public class WariRules : IRuleset
         int sum1 = cupContent.Skip(1).Take(state.Length/2-1).Sum();
         int sum2 = cupContent.Skip(state.Length/2+1).Sum();
         if (sum1 != 0 && sum2 != 0) return -1;
-        if (state[0].Pebbles == state[state.Length/2].Pebbles) return 2;
-        return state[0].Pebbles > state[state.Length/2].Pebbles ? 0 : 1;
+        if (state[HomeCupIndex(0, state.Length)].Pebbles == state[HomeCupIndex(1, state.Length)].Pebbles) return 2;
+        return state[HomeCupIndex(0, state.Length)].Pebbles > state[HomeCupIndex(1, state.Length)].Pebbles ? 0 : 1;
     }
 
     public int[] PossibleMoves(int turn, Cup[] state) => state.Select((_, i) => i).Where(i =>
@@ -87,12 +89,13 @@ public class WariRules : IRuleset
         if (i == -1) i = state.Length - 1;
         if (state[i].OwnerIndex != turn && new [] {2,3}.Contains(state[i].Pebbles))
         {
-            state[turn].Pebbles += state[i].Pebbles;
+            state[HomeCupIndex(turn, state.Length)].Pebbles += state[i].Pebbles;
             state[i].Pebbles = 0;
         }
         return 1 - turn;
     }
 
+    int HomeCupIndex(int turn, int stateLength) => turn == 0 ? stateLength / 2 : 0;
 }
 
 public class WankalaRules : IRuleset
@@ -105,8 +108,8 @@ public class WankalaRules : IRuleset
         int sum1 = cupContent.Skip(1).Take(state.Length/2-1).Sum();
         int sum2 = cupContent.Skip(state.Length/2+1).Sum();
         if (sum1 != 0 && sum2 != 0) return -1;
-        if (state[0].Pebbles == state[state.Length/2].Pebbles) return 2;
-        return state[0].Pebbles > state[state.Length/2].Pebbles ? 0 : 1;
+        if (state[HomeCupIndex(0, state.Length)].Pebbles == state[HomeCupIndex(1, state.Length)].Pebbles) return 2;
+        return state[HomeCupIndex(0, state.Length)].Pebbles > state[HomeCupIndex(1, state.Length)].Pebbles ? 0 : 1;
     }
 
     public int[] PossibleMoves(int turn, Cup[] state) => state.Select((_, i) => i).Where(i =>
@@ -134,11 +137,12 @@ public class WankalaRules : IRuleset
         if (state[i].OwnerIndex != turn) return 1 - turn;
         if (state[^i].Pebbles > 0 && state[i].Pebbles == 1)
         {
-            state[turn].Pebbles += state[^i].Pebbles + 1;
+            state[HomeCupIndex(turn, state.Length)].Pebbles += state[^i].Pebbles + 1;
             state[^i].Pebbles = 0;
             state[i].Pebbles = 0;
         }
         return 1 - turn;
     }
 
+    int HomeCupIndex(int turn, int stateLength) => turn == 0 ? stateLength / 2 : 0;
 }
