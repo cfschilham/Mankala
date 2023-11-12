@@ -1,12 +1,12 @@
 ﻿namespace Mankala;
 
-public interface IGraphics
+public interface IWinFormsGraphics
 {
     public void PaintBoard(Cup[] state, PaintEventArgs pea);
     public int CupIndexAt(Point p);
 }
 
-public class BasicGraphics : IGraphics
+public class BasicWinFormsGraphics : IWinFormsGraphics
 {
     Dictionary<Rectangle, int> _cupLookup = new();
     

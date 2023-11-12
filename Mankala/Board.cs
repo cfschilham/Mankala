@@ -3,17 +3,12 @@
 public class Board : Control
 {
     Game _game;
-    IGraphics _graphics;
+    IWinFormsGraphics _graphics;
     
     public Board(Game game, IRuleFactory rf)
     {
         _game = game;
-        _graphics = rf.MakeGraphics();
-    }
-
-    void ErrorDialog(string msg)
-    {
-        
+        _graphics = rf.MakeWinFormsGraphics();
     }
 
     protected override void OnPaint(PaintEventArgs pea)

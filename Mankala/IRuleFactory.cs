@@ -4,7 +4,7 @@ public interface IRuleFactory
 {
     Cup[] MakeState();
     IRuleset MakeRuleset();
-    IGraphics MakeGraphics();
+    IWinFormsGraphics MakeWinFormsGraphics();
 }
 
 public class MankalaRuleFactory : IRuleFactory
@@ -29,14 +29,14 @@ public class MankalaRuleFactory : IRuleFactory
 
     public IRuleset MakeRuleset() => new MankalaRules();
 
-    public IGraphics MakeGraphics() => new BasicGraphics();
+    public IWinFormsGraphics MakeWinFormsGraphics() => new BasicWinFormsGraphics();
 }
 
 public class WariRuleFactory : IRuleFactory
 {
     int _cupsAmount;
     int _startingPebbles;
-    public WariRuleFactory(int cupsAmount, int startingPebbles)
+    public WariRuleFactory(int cupsAmount = 6, int startingPebbles = 4)
     {
         _cupsAmount = cupsAmount;
         _startingPebbles = startingPebbles;
@@ -54,14 +54,14 @@ public class WariRuleFactory : IRuleFactory
 
     public IRuleset MakeRuleset() => new WariRules();
 
-    public IGraphics MakeGraphics() => new BasicGraphics();
+    public IWinFormsGraphics MakeWinFormsGraphics() => new BasicWinFormsGraphics();
 }
 
 public class WankalaRuleFactory : IRuleFactory
 {
     int _cupsAmount;
     int _startingPebbles;
-    public WankalaRuleFactory(int cupsAmount, int startingPebbles)
+    public WankalaRuleFactory(int cupsAmount = 6, int startingPebbles = 4)
     {
         _cupsAmount = cupsAmount;
         _startingPebbles = startingPebbles;
@@ -79,6 +79,6 @@ public class WankalaRuleFactory : IRuleFactory
 
     public IRuleset MakeRuleset() => new WankalaRules();
 
-    public IGraphics MakeGraphics() => new BasicGraphics();
+    public IWinFormsGraphics MakeWinFormsGraphics() => new BasicWinFormsGraphics();
 }
 

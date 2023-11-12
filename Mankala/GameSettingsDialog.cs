@@ -2,7 +2,7 @@
 
 public partial class GameSettingsDialog : Form
 {
-    public string Variant => variantComboBox.SelectedText;
+    public string Variant => (string)variantComboBox.SelectedItem;
     public int CupsAmount => (int)cupsAmountNumericUpDown.Value;
     public int StartingPebbles => (int)startingPebblesNumericUpDown.Value;
     
