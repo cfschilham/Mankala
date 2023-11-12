@@ -40,7 +40,7 @@ public class MankalaRules : IRuleset
         }
 
         i--; // Make i equal the last cup into which a pebble was put.
-        if (i == -1) i = state.Length;
+        if (i == -1) i = state.Length - 1;
         if (state[i].Type == Cup.CupType.Home) return turn;
         if (state[i].Pebbles > 1) return ApplyMoveTail(i, state, turn);
         if (state[i].OwnerIndex != turn) return 1 - turn;
