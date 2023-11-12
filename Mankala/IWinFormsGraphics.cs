@@ -37,7 +37,7 @@ public class BasicWinFormsGraphics : IWinFormsGraphics
         if (state[index].Type != Cup.CupType.Regular) return new Rectangle(x, y, w, h);
         h = 40;
         y = state[index].OwnerIndex == 0 ? 80 : 0;
-        x -= state[index].OwnerIndex == 1 ? state.Length / 2 * 50 : 0;
+        if (index > state.Length / 2) x -= (index - (state.Length / 2)) * 100;
 
         return new Rectangle(x, y, w, h);
     }
