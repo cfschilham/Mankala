@@ -11,7 +11,7 @@ public class Game
     public Game(IRuleFactory rf, Player[] ps)
     {
         _ruleset = rf.MakeRuleset();
-        _state = rf.MakeState(cups, startingPebbles);
+        _state = rf.MakeState();
         _turn = 0;
         _players = ps;
     }

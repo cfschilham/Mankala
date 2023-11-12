@@ -9,4 +9,10 @@
         <RootNamespace>Mankala</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Update="GameSettingsDialog.cs">
+        <SubType>Form</SubType>
+      </Compile>
+    </ItemGroup>
+
 </Project>
