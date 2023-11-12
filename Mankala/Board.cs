@@ -15,8 +15,6 @@ public class Board : Control
     {
         base.OnPaint(pea);
         _graphics.PaintBoard(_game.GetState(), pea);
-        pea.Graphics.DrawString($"Turn: {_game.GetTurn().Name}", new Font("Arial", 14), new SolidBrush(Color.Black),
-            10, 200);
     }
 
     protected override void OnMouseMove(MouseEventArgs mea)
@@ -44,12 +42,7 @@ public class Board : Control
         if (i == -1) return;
         if (!_game.IsValidMove(i)) return;
         _game.ApplyMove(i);
+
         Invalidate();
-        if (_game.Winner() == -1) return;
-        var text = "Tie!";
-        int w = _game.Winner();
-        if (w < 2) text = $"{_game.GetPlayers()[w].Name} wins!";
-        MessageBox.Show(text);
-        Application.Exit();
     }
 }

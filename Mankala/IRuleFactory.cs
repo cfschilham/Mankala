@@ -18,10 +18,10 @@ public class MankalaRuleFactory : IRuleFactory
     }
     public Cup[] MakeState()
     {
-        Cup[] cups = new Cup[_cupsAmount * 2 + 2];
-        cups[0] = new Cup(1, 0, Cup.CupType.Home);
+        Cup[] cups = new Cup[_cupsAmount * 2 + 2]; 
+        cups[0] = new Cup(1, 0, Cup.CupType.Home); //These two lines create the homecups
         cups[_cupsAmount + 1] = new Cup(0, 0, Cup.CupType.Home);
-        for (int i = 1; i <= _cupsAmount; i++) cups[i] = new Cup(0, _startingPebbles, Cup.CupType.Regular);
+        for (int i = 1; i <= _cupsAmount; i++) cups[i] = new Cup(0, _startingPebbles, Cup.CupType.Regular); //These create the regular cups
         for (int i = _cupsAmount + 2; i <= _cupsAmount * 2 + 1; i++) cups[i] = new Cup(1, _startingPebbles, Cup.CupType.Regular);
 
         return cups;

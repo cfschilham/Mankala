@@ -18,7 +18,7 @@ public class BasicWinFormsGraphics : IWinFormsGraphics
                 throw new ArgumentException("invalid state structure");
         
         _cupLookup.Clear();
-        for (int i = 0; i < state.Length; i++)
+        for (int i = 0; i < state.Length; i++) //Method for drawing the cups
         {
             Rectangle cupRect = CupRect(i, state);
             _cupLookup[cupRect] = i; 
@@ -28,7 +28,7 @@ public class BasicWinFormsGraphics : IWinFormsGraphics
         }
     }
 
-    internal Rectangle CupRect(int index, Cup[] state)
+    internal Rectangle CupRect(int index, Cup[] state) //Returns measurements for cups
     {
         int h = 120;
         int w = 40;

@@ -3,7 +3,7 @@
 public class Game
 {
     Cup[] _state;
-    int _turn;
+    int _turn; 
     Player[] _players;
     IRuleset _ruleset;
     int cups, startingPebbles;
@@ -21,7 +21,7 @@ public class Game
     public void ApplyMove(int index)
     {
         if (!IsValidMove(index)) throw new IndexOutOfRangeException("move is not valid");
-        _turn = _ruleset.ApplyMove(index, _state);
+        _turn = _ruleset.ApplyMove(index, _state); //Turn is updated after a move
     }
 
     public Player GetTurn() => _players[_turn];
