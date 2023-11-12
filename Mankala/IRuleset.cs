@@ -132,7 +132,7 @@ public class WankalaRules : IRuleset
             state[i].Pebbles = 0;
         }
         if (state[i].OwnerIndex != turn) return 1 - turn;
-        if (state[^i].Pebbles > 0)
+        if (state[^i].Pebbles > 0 && state[i].Pebbles == 1)
         {
             state[turn].Pebbles += state[^i].Pebbles + 1;
             state[^i].Pebbles = 0;
