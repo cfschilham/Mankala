@@ -8,7 +8,7 @@ public interface IWinFormsGraphics
 
 public class BasicWinFormsGraphics : IWinFormsGraphics
 {
-    Dictionary<Rectangle, int> _cupLookup = new();
+    internal Dictionary<Rectangle, int> _cupLookup = new();
     
     public void PaintBoard(Cup[] state, PaintEventArgs pea)
     {
@@ -28,7 +28,7 @@ public class BasicWinFormsGraphics : IWinFormsGraphics
         }
     }
 
-    Rectangle CupRect(int index, Cup[] state)
+    internal Rectangle CupRect(int index, Cup[] state)
     {
         int h = 120;
         int w = 40;

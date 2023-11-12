@@ -1,8 +1,5 @@
 namespace Mankala.Tests;
 
-using Mankala;
-using Xunit;
-
 public class MankalaRuleFactoryTests
 {
     [Theory]
